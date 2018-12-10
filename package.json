@@ -1,0 +1,26 @@
+{
+  "name": "twits",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackharvey1/twits.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jackharvey1/twits/issues"
+  },
+  "homepage": "https://github.com/jackharvey1/twits#readme",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "eslint": "^5.10.0",
+    "jest": "^23.6.0"
+  }
+}
