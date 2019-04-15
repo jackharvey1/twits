@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "chain": "eval $(cat .credentials) && API_KEY=$API_KEY API_SECRET_KEY=$API_SECRET_KEY node src/chain.js",
     "test": "jest",
     "lint": "eslint src"
   },
@@ -18,9 +19,11 @@
   },
   "homepage": "https://github.com/jackharvey1/twits#readme",
   "dependencies": {
+    "axios": "0.18.0"
   },
   "devDependencies": {
-    "eslint": "^5.10.0",
-    "jest": "^23.6.0"
+    "eslint": "5.10.0",
+    "jest": "23.6.0",
+    "nock": "10.0.4"
   }
 }
