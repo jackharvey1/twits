@@ -33,7 +33,7 @@ function getBearerToken () {
 
 function getStream (user, bearer) {
     const path = '1.1/statuses/user_timeline.json';
-    const queryString = `screen_name=${user}&count=50&tweet_mode=extended`;
+    const queryString = `screen_name=${user}&count=3200&tweet_mode=extended`;
     const options = {
         url: `https://${host}/${path}?${queryString}`,
         headers: {
