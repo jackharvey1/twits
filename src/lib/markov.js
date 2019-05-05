@@ -77,7 +77,8 @@ const createChainWithCounts = ngrams =>
     }, {});
 
 const createNGrams = (corpus, n) => corpus
-    .replace(/(\.|^|$)/g, ` ${EOLToken} `)
+    .replace(/https?:\/\/[^\s]+/g, '')
+    .replace(/(\.|\?|!|^|$)/g, ` ${EOLToken} `)
     .split(/\s+/)
     .filter(Boolean)
     .map((_, i, words) => words.slice(i, i + n))
