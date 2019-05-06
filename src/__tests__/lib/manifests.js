@@ -55,33 +55,33 @@ module.exports.order2Percentiles = {
 };
 
 module.exports.complexOrder2Percentiles = {
-    '%EOL%': {
-        '%EOL%': 1,
-        '%total%': 4,
+    [EOLToken]: {
+        [EOLToken]: 1,
+        [totalToken]: 4,
         'one': 0.25,
         'three': 0.5,
         'two': 0.75,
     },
     'five': {
-        '%EOL%': 1,
-        '%total%': 1,
+        [EOLToken]: 1,
+        [totalToken]: 1,
     },
     'four': {
-        '%total%': 1,
+        [totalToken]: 1,
         'five': 1,
     },
     'one': {
-        '%total%': 3,
+        [totalToken]: 3,
         'two': 1,
     },
     'three': {
-        '%total%': 3,
+        [totalToken]: 3,
         'four': 1,
         'one': 0.6666666666666666,
     },
     'two': {
-        '%EOL%': 0.8,
-        '%total%': 5,
+        [EOLToken]: 0.8,
+        [totalToken]: 5,
         'three': 0.4,
         'two': 1,
     },
@@ -154,61 +154,61 @@ module.exports.order3Percentiles = {
 };
 
 module.exports.complexOrder3Percentiles = {
-    '%EOL%': {
+    [EOLToken]: {
         'one': {
-            '%total%': 1,
+            [totalToken]: 1,
             'two': 1,
         },
         'three': {
-            '%total%': 1,
+            [totalToken]: 1,
             'four': 1,
         },
         'two': {
-            '%total%': 1,
+            [totalToken]: 1,
             'two': 1,
         },
     },
     'five': {
-        '%EOL%': {
-            '%total%': 1,
+        [EOLToken]: {
+            [totalToken]: 1,
             'two': 1,
         },
     },
     'four': {
         'five': {
-            '%EOL%': 1,
-            '%total%': 1,
+            [EOLToken]: 1,
+            [totalToken]: 1,
         },
     },
     'one': {
         'two': {
-            '%EOL%': 1,
-            '%total%': 3,
+            [EOLToken]: 1,
+            [totalToken]: 3,
             'three': 0.3333333333333333,
         },
     },
     'three': {
         'four': {
-            '%total%': 1,
+            [totalToken]: 1,
             'five': 1,
         },
         'one': {
-            '%total%': 2,
+            [totalToken]: 2,
             'two': 1,
         },
     },
     'two': {
-        '%EOL%': {
-            '%EOL%': 1,
-            '%total%': 2,
+        [EOLToken]: {
+            [EOLToken]: 1,
+            [totalToken]: 2,
             'three': 0.5,
         },
         'three': {
-            '%total%': 2,
+            [totalToken]: 2,
             'one': 1,
         },
         'two': {
-            '%total%': 1,
+            [totalToken]: 1,
             'three': 1,
         },
     },
@@ -285,83 +285,268 @@ module.exports.order4Percentiles = {
 };
 
 module.exports.complexOrder4Percentiles = {
-    '%EOL%': {
+    [EOLToken]: {
         'one': {
             'two': {
-                '%total%': 1,
+                [totalToken]: 1,
                 'three': 1,
             },
         },
         'three': {
             'four': {
-                '%total%': 1,
+                [totalToken]: 1,
                 'five': 1,
             },
         },
         'two': {
             'two': {
-                '%total%': 1,
+                [totalToken]: 1,
                 'three': 1,
             },
         },
     },
     'five': {
-        '%EOL%': {
+        [EOLToken]: {
             'two': {
-                '%total%': 1,
+                [totalToken]: 1,
                 'two': 1,
             },
         },
     },
     'four': {
         'five': {
-            '%EOL%': {
-                '%total%': 1,
+            [EOLToken]: {
+                [totalToken]: 1,
                 'two': 1,
             },
         },
     },
     'one': {
         'two': {
-            '%EOL%': {
-                '%EOL%': 1,
-                '%total%': 2,
+            [EOLToken]: {
+                [EOLToken]: 1,
+                [totalToken]: 2,
                 'three': 0.5,
             },
             'three': {
-                '%total%': 1,
+                [totalToken]: 1,
                 'one': 1,
             },
         },
     }, 'three': {
         'four': {
             'five': {
-                '%EOL%': 1,
-                '%total%': 1,
+                [EOLToken]: 1,
+                [totalToken]: 1,
             },
         },
         'one': {
             'two': {
-                '%EOL%': 1, '%total%': 2,
+                [EOLToken]: 1, [totalToken]: 2,
             },
         },
     },
     'two': {
-        '%EOL%': {
+        [EOLToken]: {
             'three': {
-                '%total%': 1,
+                [totalToken]: 1,
                 'four': 1,
             },
         },
         'three': {
             'one': {
-                '%total%': 2, 'two': 1,
+                [totalToken]: 2, 'two': 1,
             },
         },
         'two': {
             'three': {
-                '%total%': 1,
+                [totalToken]: 1,
                 'one': 1,
+            },
+        },
+    },
+};
+
+module.exports.deterministicOrder2Chain = {
+    [EOLToken]: {
+        'This': 1,
+        [totalToken]: 1,
+    },
+    'This': {
+        'is': 1,
+        [totalToken]: 1,
+    },
+    'is': {
+        'an': 1,
+        [totalToken]: 1,
+    },
+    'an': {
+        'entirely': 1,
+        [totalToken]: 1,
+    },
+    'entirely': {
+        'unique': 1,
+        [totalToken]: 1,
+    },
+    'unique': {
+        'sentence': 1,
+        [totalToken]: 1,
+    },
+    'sentence': {
+        'without': 1,
+        [totalToken]: 1,
+    },
+    'without': {
+        'any': 1,
+        [totalToken]: 1,
+    },
+    'any': {
+        'repeating': 1,
+        [totalToken]: 1,
+    },
+    'repeating': {
+        'chunks': 1,
+        [totalToken]: 1,
+    },
+    'chunks': {
+        [EOLToken]: 1,
+        [totalToken]: 1,
+    },
+};
+
+module.exports.deterministicOrder3Chain = {
+    [EOLToken]: {
+        'This': {
+            'is': 1,
+            [totalToken]: 1,
+        },
+    },
+    'This': {
+        'is': {
+            'an': 1,
+            [totalToken]: 1,
+        },
+    },
+    'is': {
+        'an': {
+            'entirely': 1,
+            [totalToken]: 1,
+        },
+    },
+    'an': {
+        'entirely': {
+            'unique': 1,
+            [totalToken]: 1,
+        },
+    },
+    'entirely': {
+        'unique': {
+            'sentence': 1,
+            [totalToken]: 1,
+        },
+    },
+    'unique': {
+        'sentence': {
+            'without': 1,
+            [totalToken]: 1,
+        },
+    },
+    'sentence': {
+        'without': {
+            'any': 1,
+            [totalToken]: 1,
+        },
+    },
+    'without': {
+        'any': {
+            'repeating': 1,
+            [totalToken]: 1,
+        },
+    },
+    'any': {
+        'repeating': {
+            'chunks': 1,
+            [totalToken]: 1,
+        },
+    },
+    'repeating': {
+        'chunks': {
+            [EOLToken]: 1,
+            [totalToken]: 1,
+        },
+    },
+};
+
+module.exports.deterministicOrder4Chain = {
+    [EOLToken]: {
+        'This': {
+            'is': {
+                'an': 1,
+                [totalToken]: 1,
+            },
+        },
+    },
+    'This': {
+        'is': {
+            'an': {
+                'entirely': 1,
+                [totalToken]: 1,
+            },
+        },
+    },
+    'is': {
+        'an': {
+            'entirely': {
+                'unique': 1,
+                [totalToken]: 1,
+            },
+        },
+    },
+    'an': {
+        'entirely': {
+            'unique': {
+                'sentence': 1,
+                [totalToken]: 1,
+            },
+        },
+    },
+    'entirely': {
+        'unique': {
+            'sentence': {
+                'without': 1,
+                [totalToken]: 1,
+            },
+        },
+    },
+    'unique': {
+        'sentence': {
+            'without': {
+                'any': 1,
+                [totalToken]: 1,
+            },
+        },
+    },
+    'sentence': {
+        'without': {
+            'any': {
+                'repeating': 1,
+                [totalToken]: 1,
+            },
+        },
+    },
+    'without': {
+        'any': {
+            'repeating': {
+                'chunks': 1,
+                [totalToken]: 1,
+            },
+        },
+    },
+    'any': {
+        'repeating': {
+            'chunks': {
+                [EOLToken]: 1,
+                [totalToken]: 1,
             },
         },
     },
@@ -385,8 +570,8 @@ module.exports.trigrams = [
 ];
 
 module.exports.quadgrams = [
-    ['%EOL%', 'one', 'two', 'three'],
+    [EOLToken, 'one', 'two', 'three'],
     ['one', 'two', 'three', 'four'],
     ['two', 'three', 'four', 'five'],
-    ['three', 'four', 'five', '%EOL%'],
+    ['three', 'four', 'five', EOLToken],
 ];
