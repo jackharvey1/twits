@@ -8,16 +8,22 @@ const writeFile = promisify(fs.writeFile);
 
 const userFlagIndex = process.argv.findIndex(arg => arg === '--user');
 const user = process.argv[userFlagIndex + 1];
-const orderFlagIndex = process.argv.findIndex(arg => arg === '--order');
-const order = Number(process.argv[orderFlagIndex + 1]);
+const orders = [2, 3, 4];
 
 (async function () {
-    if (!user || !order) {
-        throw new Error('User or order not specified');
+    if (!user) {
+        throw new Error('User not specified');
     }
 
     const corpus = await getCorpus(user);
-    const chain = createChain(corpus, order);
-    // eslint-disable-next-line no-sync
-    await writeFile(`${__dirname}/chains/${user}.json`, JSON.stringify(chain, null, 4));
+
+    const chainGenerators = orders.map(order => createChain(corpus, order));
+
+    const chains = await chainGenerators;
+
+    const fileWrites = chains.map((chain, i) =>
+        writeFile(`${__dirname}/chains/${user}-order${i + 2}.json`, JSON.stringify(chain, null, 4))
+    );
+
+    await fileWrites;
 })();
