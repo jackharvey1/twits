@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { promisify } = require('util');
+const { resolve } = require('path');
 
 const { getCorpus } = require('./lib/twitter');
 const { createChain } = require('./lib/markov');
@@ -21,8 +22,10 @@ const orders = [2, 3, 4];
 
     const chains = await chainGenerators;
 
+    const writePath = resolve(`${__dirname}/../chains`);
+
     const fileWrites = chains.map((chain, i) =>
-        writeFile(`${__dirname}/chains/${user}-order${i + 2}.json`, JSON.stringify(chain, null, 4))
+        writeFile(`${writePath}/${user}-order${i + 2}.json`, JSON.stringify(chain, null, 4))
     );
 
     await fileWrites;
