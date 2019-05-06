@@ -1,14 +1,15 @@
-const { logInPlace } = require('../helpers/log');
+const { log, logInPlace } = require('../helpers/log');
 
 const EOLToken = '%EOL%';
 const totalToken = '%total%';
 
 function createChain (corpus, order) {
-    logInPlace('[MARKOV] Creating n-grams');
+    logInPlace(`[MARKOV] Creating ${order}-grams`);
     const ngrams = createNGrams(corpus, order);
 
     const chainWithCounts = createChainWithCounts(ngrams);
 
+    log('[MARKOV] Converting counts to percentiles in chain', 0);
     return countsToPercentiles(chainWithCounts);
 }
 
