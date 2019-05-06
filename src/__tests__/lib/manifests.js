@@ -1,5 +1,4 @@
-const EOLToken = '%EOL%';
-const totalToken = '%total%';
+const { EOLToken, totalToken } = require('../../consts');
 
 module.exports.order2Counts = {
     [EOLToken]: {

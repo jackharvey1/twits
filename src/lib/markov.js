@@ -1,7 +1,5 @@
 const { log, logInPlace } = require('../helpers/log');
-
-const EOLToken = '%EOL%';
-const totalToken = '%total%';
+const { EOLToken, totalToken } = require('../consts');
 
 function createChain (corpus, order) {
     logInPlace(`[MARKOV] Creating ${order}-grams`);

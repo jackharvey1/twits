@@ -2,14 +2,14 @@ const fs = require('fs');
 const { promisify } = require('util');
 const { resolve } = require('path');
 
-const { getCorpus } = require('./lib/twitter');
-const { createChain } = require('./lib/markov');
+const { getCorpus } = require('../lib/twitter');
+const { createChain } = require('../lib/markov');
+const { orders } = require('../consts');
 
 const writeFile = promisify(fs.writeFile);
 
 const userFlagIndex = process.argv.findIndex(arg => arg === '--user');
 const user = process.argv[userFlagIndex + 1];
-const orders = [2, 3, 4];
 
 (async function () {
     if (!user) {
