@@ -20,13 +20,7 @@ async function generator(user, order) {
 
     const initialWords = generateInitialWords(chains, orders);
 
-    const text = completeTextGeneration(chains[order], initialWords, order);
-
-    const EOLRegex = new RegExp(` ${EOLToken}\\s?`, 'g');
-
-    return text
-        .join(' ')
-        .replace(EOLRegex, '. ');
+    return completeTextGeneration(chains[order], initialWords, order);
 }
 
 function readChains(user, orders) {
@@ -58,10 +52,16 @@ function completeTextGeneration(chain, text, order) {
     if (nextWord === EOLToken) {
         const tweet = nextSentence.join(' ');
         if (tweet.length > CHARACTER_LIMIT) {
-            const [, truncated] = tweet.match(`((.*)${EOLToken}).+`);
             const initialWords = nextSentence.slice(0, order - 1);
-            return truncated ? nextSentence : completeTextGeneration(chain, initialWords, order);
+            return completeTextGeneration(chain, initialWords, order);
         }
+
+        const EOLRegex = new RegExp(` ${EOLToken}\\s?`, 'g');
+
+        return text
+            .concat(`${EOLToken} `)
+            .join(' ')
+            .replace(EOLRegex, '. ');
     }
 
     return completeTextGeneration(chain, nextSentence, order);

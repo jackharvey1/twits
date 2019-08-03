@@ -48,7 +48,7 @@ describe('Generator', () => {
 
         describe('Completing text generation', () => {
             it('completes a full tweet from order-2', () => {
-                return expect(generator('test', 2)).resolves.toEqual(deterministicCorpus.repeat(4));
+                return expect(generator('test', 2)).resolves.toEqual(deterministicCorpus);
             });
 
             it('completes a full tweet from order-3', () => {
