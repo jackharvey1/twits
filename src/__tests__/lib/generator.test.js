@@ -68,6 +68,7 @@ describe('Generator', () => {
                     round: jest.fn(),
                 };
                 await expect(generator('test', 4)).resolves.toEqual(deterministicCorpus);
+                // eslint-disable-next-line require-atomic-updates
                 global.Math = originalMath;
             });
         });
