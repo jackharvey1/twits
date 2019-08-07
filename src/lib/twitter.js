@@ -26,7 +26,7 @@ function getBearerToken () {
         },
     };
 
-    log('[TWITTER] Fetching bearer token with options', options);
+    log('[TWITTER] Fetching bearer token with options');
 
     return wrappedRequest(options);
 }
@@ -41,7 +41,7 @@ function getStream (user, bearer) {
         },
     };
 
-    log('[TWITTER] Fetching stream with options', options);
+    log('[TWITTER] Fetching stream with options');
 
     return wrappedRequest(options);
 }
