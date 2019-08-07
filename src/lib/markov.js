@@ -18,20 +18,22 @@ const countsToPercentiles = chainWithCounts => {
 
     if (nextLevelIsLeaf) {
         const [, total] = entries.find(([key]) => key === totalToken);
-        const { percentiles } = entries.reduce(({ currentPercentile, percentiles }, [key, value]) => {
-            const incrementedPercentile = Math.round((currentPercentile * total) + value) / total;
-            const nextPercentile = key === totalToken
-                ? currentPercentile
-                : incrementedPercentile;
+        const { percentiles } = entries.reduce(
+            ({ currentPercentile, percentiles }, [key, value]) => {
+                const incrementedPercentile =
+                    Math.round((currentPercentile * total) + value) / total;
+                const nextPercentile = key === totalToken
+                    ? currentPercentile
+                    : incrementedPercentile;
 
-            return {
-                percentiles: {
-                    ...percentiles,
-                    [key]: key === totalToken ? value : nextPercentile,
-                },
-                currentPercentile: nextPercentile,
-            };
-        }, { currentPercentile: 0, percentiles: {} });
+                return {
+                    percentiles: {
+                        ...percentiles,
+                        [key]: key === totalToken ? value : nextPercentile,
+                    },
+                    currentPercentile: nextPercentile,
+                };
+            }, { currentPercentile: 0, percentiles: {} });
 
         return percentiles;
     }

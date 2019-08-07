@@ -25,7 +25,9 @@ async function generator(user, order) {
 
 function readChains(user, orders) {
     const readPath = resolve(`${__dirname}/../chains`);
-    const fileReads = orders.map(order => readFile(`${readPath}/${user}-order${order}.json`, 'utf8'));
+    const fileReads = orders.map(
+        order => readFile(`${readPath}/${user}-order${order}.json`, 'utf8')
+    );
 
     return Promise.all(fileReads)
         .then(chains => chains.reduce((chainCatalogue, chain, i) => ({
