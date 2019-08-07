@@ -3,7 +3,8 @@ const { EOLToken, totalToken } = require('../consts');
 
 function createChain (corpus, order) {
     logInPlace(`[MARKOV] Creating ${order}-grams`);
-    const ngrams = createNGrams(corpus, order);
+    const cleanedCorpus = cleanCorpusAsArray(corpus);
+    const ngrams = createNGrams(cleanedCorpus, order);
 
     const chainWithCounts = createChainWithCounts(ngrams);
 
@@ -75,11 +76,13 @@ const createChainWithCounts = ngrams =>
         };
     }, {});
 
-const createNGrams = (corpus, n) => corpus
-    .replace(/https?:\/\/[^\s]+/g, '')
+const cleanCorpusAsArray = corpus => corpus
+    .replace(/(https?:\/\/[^\s]+|[^\s]*…[^\s]*)/g, '')
     .replace(/(\.|\?|!|^|$)/g, ` ${EOLToken} `)
     .split(/\s+/)
-    .filter(Boolean)
+    .filter(Boolean);
+
+const createNGrams = (corpus, n) => corpus
     .map((_, i, words) => words.slice(i, i + n))
     .filter(ngram => ngram.length >= n);
 
