@@ -1,7 +1,7 @@
-function log(text) {
+function log(text, newline) {
     const timestamp = new Date().toISOString();
     // eslint-disable-next-line no-console
-    console.log(`(${timestamp}) ${text}`);
+    console.log(`${newline ? '\n' : ''}(${timestamp}) ${text}`);
 }
 
 function logInPlace(text, index) {
@@ -10,7 +10,7 @@ function logInPlace(text, index) {
     process.stdout.write(prefix);
     process.stdout.clearLine();
     process.stdout.cursorTo(0);
-    process.stdout.write(`(${timestamp}) ${text}`);
+    process.stdout.write(`${timestamp}) ${text}`);
 }
 
 module.exports = {

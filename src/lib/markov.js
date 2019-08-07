@@ -7,7 +7,7 @@ function createChain (corpus, order) {
 
     const chainWithCounts = createChainWithCounts(ngrams);
 
-    log('[MARKOV] Converting counts to percentiles in chain', 0);
+    log('[MARKOV] Converting counts to percentiles in chain', true);
     return countsToPercentiles(chainWithCounts);
 }
 
@@ -67,7 +67,7 @@ function updateCount(ngram, countsPath) {
 const createChainWithCounts = ngrams =>
     ngrams.reduce((accumulator, ngram, i) => {
         const progress = Math.round((i / ngrams.length) * 100);
-        logInPlace(`[MARKOV] <${progress}%> Creating chain with counts`, i);
+        logInPlace(`[MARKOV] <${progress}%> Creating chain with counts`);
 
         return {
             ...accumulator,
@@ -76,7 +76,7 @@ const createChainWithCounts = ngrams =>
     }, {});
 
 const createNGrams = (corpus, n) => corpus
-    .replace(/https?:\/\/[^\s]+/g, '')
+    .replace(/(https?:\/\/[^\s]+|…)/g, '')
     .replace(/(\.|\?|!|^|$)/g, ` ${EOLToken} `)
     .split(/\s+/)
     .filter(Boolean)
