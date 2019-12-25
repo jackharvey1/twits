@@ -1,9 +1,13 @@
 const request = require('axios');
-const { log } = require('../helpers/log');
+const queryString = require('querystring');
+const { log, logInPlace } = require('../helpers/log');
 
 const host = 'api.twitter.com';
 const apiKey = process.env.API_KEY;
 const apiSecretKey = process.env.API_SECRET_KEY;
+const pageSize = 200;
+const maxTweets = 3200;
+const maxPage = maxTweets / pageSize;
 
 const getCorpus = user =>
     getBearerToken()
@@ -31,19 +35,35 @@ function getBearerToken () {
     return wrappedRequest(options);
 }
 
-function getStream (user, bearer) {
+function getStream (user, bearer, page = 1, maxId) {
     const path = '1.1/statuses/user_timeline.json';
-    const queryString = `screen_name=${user}&count=3200&tweet_mode=extended`;
+    const baseQueryObject = {
+        'screen_name': user,
+        'tweet_mode': 'extended',
+        'trim_user': 1,
+        count: pageSize,
+    };
+    const queryObject = maxId
+        ? { ...baseQueryObject, 'max_id': maxId }
+        : baseQueryObject;
     const options = {
-        url: `https://${host}/${path}?${queryString}`,
+        url: `https://${host}/${path}?${queryString.stringify(queryObject)}`,
         headers: {
             Authorization: `Bearer ${bearer}`,
         },
     };
 
-    log('[TWITTER] Fetching stream with options');
+    logInPlace(`[TWITTER] Fetching stream with options (page ${page} of ${maxPage})`);
 
-    return wrappedRequest(options);
+    return page === maxPage
+        ? wrappedRequest(options)
+        : wrappedRequest(options).then(async response => {
+            const nextMaxId = response[response.length - 1].id;
+            return [
+                ...response,
+                ...(await getStream(user, bearer, page + 1, nextMaxId)),
+            ];
+        });
 }
 
 const wrappedRequest = options =>
