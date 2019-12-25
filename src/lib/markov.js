@@ -5,7 +5,7 @@ function createChain (corpus, order) {
     logInPlace(`[MARKOV] Creating ${order}-grams`);
     const ngrams = createNGrams(corpus, order);
 
-    const chainWithCounts = createChainWithCounts(ngrams);
+    const chainWithCounts = createChainWithCounts(ngrams, order);
 
     log('[MARKOV] Converting counts to percentiles in chain', true);
     return countsToPercentiles(chainWithCounts);
@@ -44,38 +44,36 @@ const countsToPercentiles = chainWithCounts => {
     }), {});
 };
 
-function updateCount(ngram, countsPath) {
+function updateCount(ngram, currentPath) {
     for (let i = 0; i < ngram.length; i++) {
         const remainingPath = ngram.slice(i);
         const currentToken = remainingPath[0];
 
         if (remainingPath.length === 1) {
             return {
-                ...countsPath,
-                [currentToken]: (countsPath[currentToken] || 0) + 1,
-                '%total%': (countsPath['%total%'] || 0) + 1,
+                ...currentPath,
+                [currentToken]: (currentPath[currentToken] || 0) + 1,
+                '%total%': (currentPath['%total%'] || 0) + 1,
             };
         }
 
         const nextPath = remainingPath.slice(i + 1);
 
-        return {
-            ...countsPath,
-            [currentToken]: updateCount(nextPath, countsPath[currentToken] || {}),
-        };
+        currentPath[currentToken] = updateCount(nextPath, currentPath[currentToken] || {});
+        return currentPath;
     }
 }
 
-const createChainWithCounts = ngrams =>
-    ngrams.reduce((accumulator, ngram, i) => {
+const createChainWithCounts = (ngrams, order) => {
+    let chain = {};
+    for (let i = 0; i < ngrams.length; i++) {
         const progress = Math.round((i / ngrams.length) * 100);
-        logInPlace(`[MARKOV] <${progress}%> Creating chain with counts`);
+        logInPlace(`[MARKOV] <${progress}%> Creating order-${order} chain with counts`, true);
 
-        return {
-            ...accumulator,
-            ...updateCount(ngram, accumulator),
-        };
-    }, {});
+        chain = updateCount(ngrams[i], chain);
+    }
+    return chain;
+};
 
 const createNGrams = (corpus, n) => corpus
     .replace(/https?:\/\/[^\s]+/g, '')
