@@ -13,7 +13,13 @@ function logInPlace(text, index) {
     process.stdout.write(`${timestamp}) ${text}`);
 }
 
+function linebreak() {
+    // eslint-disable-next-line no-console
+    console.log('');
+}
+
 module.exports = {
     log,
     logInPlace,
+    linebreak,
 };
