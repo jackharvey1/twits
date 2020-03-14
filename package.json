@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/jackharvey1/twits#readme",
   "dependencies": {
-    "axios": "0.18.0"
+    "axios": "0.18.1"
   },
   "devDependencies": {
     "eslint": "5.10.0",
