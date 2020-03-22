@@ -24,6 +24,12 @@ const basicString = 'one two three four five';
 const complexString = 'one two three one two. three four five. two two three one two.';
 
 describe('markov', () => {
+    describe('edge cases', () => {
+        it('decodes &amp; to &', () => {
+            expect(createNGrams('&amp;', 2)).toEqual([['%EOL%', '&'], ['&', '%EOL%']]);
+        });
+    });
+
     describe('bigrams', () => {
         it('creates a list of bigrams', () => {
             expect(createNGrams(basicString, 2)).toEqual(bigrams);

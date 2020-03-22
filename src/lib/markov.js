@@ -76,6 +76,7 @@ const createChainWithCounts = (ngrams, order) => {
 };
 
 const createNGrams = (corpus, n) => corpus
+    .replace('&amp;', '&')
     .replace(/https?:\/\/[^\s]+/g, '')
     .replace(/(\.|\?|!|^|$)/g, ` ${EOLToken} `)
     .split(/\s+/)
