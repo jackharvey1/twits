@@ -74,7 +74,7 @@ const wrappedRequest = options =>
     request(options)
         .then(({ data }) => data)
         .catch(error => {
-            log(error);
+            log(`Error: ${error.response.data.errors[0].message}`);
             process.exit(1);
         });
 
