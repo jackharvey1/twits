@@ -19,6 +19,10 @@ const concatenateTweets = tweets =>
     tweets.map(tweet => tweet.full_text.replace('\n', ' ')).join(' ');
 
 function getBearerToken () {
+    if (!apiKey || !apiSecretKey) {
+        throw new Error('Missing API credentials');
+    }
+
     const path = 'oauth2/token';
     const queryString = 'grant_type=client_credentials';
     const options = {
