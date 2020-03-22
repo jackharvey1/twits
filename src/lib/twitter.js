@@ -70,6 +70,19 @@ function getStream (user, bearer, page = 1, maxId) {
         });
 }
 
+function createTweet (content, bearer) {
+    const path = '1.1/statuses/update.json';
+    const options = {
+        url: `https://${host}/${path}`,
+        method: 'POST',
+        headers: {
+            Authorization: `Bearer ${bearer}`,
+        },
+    };
+
+    return wrappedRequest(options);
+}
+
 const wrappedRequest = options =>
     request(options)
         .then(({ data }) => data)
@@ -82,4 +95,5 @@ module.exports = {
     getBearerToken,
     getStream,
     getCorpus,
+    createTweet,
 };
