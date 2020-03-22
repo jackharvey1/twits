@@ -28,6 +28,10 @@ describe('markov', () => {
         it('decodes &amp; to &', () => {
             expect(createNGrams('&amp;', 2)).toEqual([['%EOL%', '&'], ['&', '%EOL%']]);
         });
+
+        it('removes URLs', () => {
+            expect(createNGrams('https://google.com/?search=something', 2)).toEqual([]);
+        });
     });
 
     describe('bigrams', () => {
